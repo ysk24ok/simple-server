@@ -12,11 +12,11 @@ $ make
 Run the server.
 
 ```console
-$ examples/tcp_server_example
+$ examples/greeter_tcp_server
 ```
 
 Then, run the client.
 
 ```console
-$ examples/tcp_client_example Alice
+$ examples/greeter_tcp_client Alice
 ```

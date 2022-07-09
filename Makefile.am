@@ -23,14 +23,14 @@ libsimple_client_la_SOURCES = \
 
 noinst_PROGRAMS =
 
-noinst_PROGRAMS += examples/tcp_client_example
-examples_tcp_client_example_SOURCES = \
-	examples/tcp_client_example.cpp
-examples_tcp_client_example_LDADD = \
+noinst_PROGRAMS += examples/greeter_tcp_client
+examples_greeter_tcp_client_SOURCES = \
+	examples/greeter_tcp_client.cpp
+examples_greeter_tcp_client_LDADD = \
 	libsimple_client.la
 
-noinst_PROGRAMS += examples/tcp_server_example
-examples_tcp_server_example_SOURCES = \
-	examples/tcp_server_example.cpp
-examples_tcp_server_example_LDADD = \
+noinst_PROGRAMS += examples/greeter_tcp_server
+examples_greeter_tcp_server_SOURCES = \
+	examples/greeter_tcp_server.cpp
+examples_greeter_tcp_server_LDADD = \
 	libsimple_server.la
