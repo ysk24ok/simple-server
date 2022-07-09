@@ -1,6 +1,12 @@
 simple-server
 ===
 
+Install autotools.
+
+```console
+$ sudo apt install -y autoconf automake libtool
+```
+
 Build the source.
 
 ```console
