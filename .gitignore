@@ -17,6 +17,7 @@ autom4te.cache
 /aclocal.m4
 /compile
 /config.guess
+/config.h
 /config.h.in
 /config.log
 /config.status
@@ -31,6 +32,8 @@ autom4te.cache
 # https://www.gnu.org/software/libtool/
 
 /ltmain.sh
+.libs
+libtool
 
 # http://www.gnu.org/software/texinfo
 
@@ -49,3 +52,16 @@ m4/lt~obsolete.m4
 # can automatically generate from config.status script
 # (which is called by configure script))
 Makefile
+
+# Generated files during build
+*.a
+*.la
+*.lo
+*.o
+
+# Generated binaries
+examples/greeter_tcp_client
+examples/greeter_tcp_server
+
+# Files for development
+/.vscode
