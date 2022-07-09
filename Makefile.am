@@ -1,7 +1,7 @@
 ACLOCAL_AMFLAGS = -I m4
 
 AM_CXXFLAGS = \
-	-std=c++11
+	-std=c++11 -lpthread
 AM_CPPFLAGS = \
 	-Isrc
 

@@ -24,6 +24,10 @@ int TcpServer::Start(uint16_t port, int backlog) {
     // TODO: Notify the caller of the error content
     return -1;
   }
+
+  int optval = 1;
+  setsockopt(socket_fd_, SOL_SOCKET, SO_REUSEPORT, &optval, sizeof(optval));
+
   if (bind(socket_fd_, (struct sockaddr *)&addr_, sizeof(addr_)) < 0) {
     // TODO: Notify the caller of the error content
     return -1;

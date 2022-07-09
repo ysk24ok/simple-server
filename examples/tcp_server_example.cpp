@@ -1,19 +1,36 @@
 #include <cstdlib>
 #include <iostream>
+#include <thread>
+#include <vector>
 
 #include "tcp_server.hpp"
 
-int main() {
+int run(uint16_t port, int backlog) {
   simple_server::TcpServer server;
-  uint16_t port = 12345;
-  int backlog = 1;
   if (server.Start(port, backlog) < 0) {
     std::cerr << "Starting the server failed." << std::endl;
-    std::exit(EXIT_FAILURE);
+    return -1;
   }
   if (server.Run() < 0) {
     std::cerr << "Running the server failed." << std::endl;
-    std::exit(EXIT_FAILURE);
+    return -1;
   }
+  return 0;
+}
+
+int main() {
+  uint16_t port = 12345;
+  int backlog = 1;
+  size_t num_threads = 4;
+
+  std::vector<std::thread> threads;
+  threads.reserve(num_threads);
+  for (size_t i = 0; i < num_threads; ++i) {
+    threads.emplace_back(std::thread(run, port, backlog));
+  }
+  for (size_t i = 0; i < num_threads; ++i) {
+    threads[i].join();
+  }
+
   std::exit(EXIT_SUCCESS);
 }
