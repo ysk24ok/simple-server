@@ -3,7 +3,9 @@
 
 #include <arpa/inet.h>
 
+#include <functional>
 #include <string>
+#include <vector>
 
 #include "server.hpp"
 
@@ -11,7 +13,8 @@ namespace simple_server {
 
 class TcpServer : public Server {
  public:
-  TcpServer();
+  // TODO: Make `func` return a value to a client.
+  TcpServer(std::function<void(std::vector<uint8_t>)> func);
 
   virtual ~TcpServer() noexcept;
 
@@ -23,6 +26,7 @@ class TcpServer : public Server {
   uint16_t port_;
   int socket_fd_;
   sockaddr_in addr_;
+  std::function<void(std::vector<uint8_t>)> func_;
 };
 
 }  // namespace simple_server

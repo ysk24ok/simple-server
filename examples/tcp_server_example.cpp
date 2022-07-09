@@ -5,8 +5,13 @@
 
 #include "tcp_server.hpp"
 
+void greet(const std::vector<uint8_t>& data) {
+  std::string name(data.begin(), data.end());
+  std::cout << "Hello, " << name << std::endl;
+}
+
 int run(uint16_t port, int backlog) {
-  simple_server::TcpServer server;
+  simple_server::TcpServer server(greet);
   if (server.Start(port, backlog) < 0) {
     std::cerr << "Starting the server failed." << std::endl;
     return -1;

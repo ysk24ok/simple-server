@@ -1,9 +1,17 @@
 #include <cstdlib>
+#include <cstring>
 #include <iostream>
+#include <vector>
 
 #include "tcp_client.hpp"
 
-int main() {
+int main(int argc, char* argv[]) {
+  if (argc != 2) {
+    std::cout << "Usage: ./command [name]" << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+  std::vector<uint8_t> data(argv[1], argv[1] + strlen(argv[1]));
+
   std::string host = "127.0.0.1";
   uint16_t port = 12345;
   simple_server::TcpClient client;
@@ -12,11 +20,6 @@ int main() {
     std::exit(EXIT_FAILURE);
   }
 
-  const size_t alphabet_size = 26;
-  std::vector<uint8_t> data(alphabet_size);
-  for (size_t i = 0; i < alphabet_size; ++i) {
-    data[i] = static_cast<uint8_t>('a' + i);
-  }
   if (client.Send(data) < 0) {
     std::cerr << "Sending data to the server failed." << std::endl;
     std::exit(EXIT_FAILURE);

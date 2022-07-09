@@ -3,13 +3,14 @@
 #include <unistd.h>
 
 #include <array>
-#include <vector>
+#include <iostream>
 
 namespace simple_server {
 
 constexpr size_t kBufferSize = 1024;
 
-TcpServer::TcpServer() : socket_fd_(), addr_() {
+TcpServer::TcpServer(std::function<void(std::vector<uint8_t>)> func) : socket_fd_(), addr_() {
+  func_ = func;
   addr_.sin_family = AF_INET;
 }
 
@@ -65,6 +66,7 @@ int TcpServer::Run() {
         data.insert(data.begin() + original_size, buf.begin(), buf.begin() + rsize);
       }
     }
+    func_(data);
     if (close(client_socket_fd) < 0) {
       // TODO: Notify the caller of the error content
       return -1;

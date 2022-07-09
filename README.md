@@ -18,5 +18,5 @@ $ examples/tcp_server_example
 Then, run the client.
 
 ```console
-$ examples/tcp_client_example
+$ examples/tcp_client_example Alice
 ```
